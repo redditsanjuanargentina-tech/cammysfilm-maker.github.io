@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cammy PH - Fotografía Artística Profesional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables y reset */
+        :root {
+            --primary-color: #000;
+            --secondary-color: #fff;
+            --accent-color: #D4AF37; /* Cambiado a dorado */
+            --accent-hover: #B8941F; /* Dorado más oscuro para hover */
+            --text-light: #999;
+            --spacing-sm: 10px;
+            --spacing-md: 20px;
+            --spacing-lg: 40px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header y navegación */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: var(--spacing-md) 0;
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: var(--spacing-sm) 0;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--secondary-color);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: var(--spacing-lg);
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 var(--spacing-md);
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-light);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: 2px solid var(--accent-color);
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            margin-left: var(--spacing-sm);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        
+        /* Servicios Section */
+        .services {
+            padding: 100px 0;
+            background-color: var(--primary-color);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .section-title p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 400px;
+            transition: var(--transition);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .service-card:hover .service-img {
+            transform: scale(1.05);
+        }
+        
+        .service-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: var(--spacing-lg);
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        }
+        
+        .service-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .service-overlay p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        
+        /* Filosofía Section */
+        .philosophy {
+            padding: 100px 0;
+            background-color: #111;
+        }
+        
+        .philosophy-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .philosophy-text {
+            flex: 1;
+            padding-right: var(--spacing-lg);
+        }
+        
+        .philosophy-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .philosophy-text p {
+            color: var(--text-light);
+            margin-bottom: var(--spacing-md);
+            font-size: 1.1rem;
+        }
+        
+        .philosophy-image {
+            flex: 1;
+            height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .philosophy-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Contacto Section */
+        .contact {
+            padding: 100px 0;
+            background-color: var(--primary-color);
+        }
+        
+        .contact-content {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: var(--spacing-lg);
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .contact-info p {
+            color: var(--text-light);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .contact-details {
+            margin-top: var(--spacing-lg);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .contact-item i {
+            color: var(--accent-color);
+            margin-right: var(--spacing-sm);
+            font-size: 1.2rem;
+        }
+        
+        .contact-form {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #111;
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: var(--secondary-color);
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #111;
+            padding: 70px 0 20px;
+            border-top: 1px solid #333;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .footer-column p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #222;
+            border-radius: 50%;
+            color: var(--secondary-color);
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .philosophy-content {
+                flex-direction: column;
+            }
+            
+            .philosophy-text {
+                padding-right: 0;
+                margin-bottom: var(--spacing-lg);
+            }
+            
+            .contact-content {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-wrap: wrap;
+            }
+            
+            .footer-column {
+                flex: 0 0 50%;
+                margin-bottom: var(--spacing-lg);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn-container {
+                display: flex;
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+            
+            .footer-column {
+                flex: 0 0 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav class="navbar">
+            <a href="#" class="logo">CAMMY <span>PH</span></a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#filosofia">Filosofía</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <video autoplay muted loop class="hero-video">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-woman-taking-a-photo-43785-large.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <h1>Explorando el Potencial Artístico</h1>
+            <p>En Cammy PH me especializo en capturar la esencia única de cada persona, revelando su máximo potencial artístico a través de la fotografía profesional.</p>
+            <div class="btn-container">
+                <a href="#servicios" class="btn">Ver Servicios</a>
+                <a href="#contacto" class="btn btn-outline">Contactar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Section -->
+    <section class="services" id="servicios">
+        <div class="section-title">
+            <h2>Nuestros Servicios</h2>
+            <p>Especializados en diferentes áreas de la fotografía para capturar momentos únicos</p>
+        </div>
+        <div class="services-grid">
+            <!-- Servicio 1: Bailarines -->
+            <div class="service-card">
+                <img src="https://drive.google.com/thumbnail?id=12q9Min7OD2eBxY-chhn7mEW0eRXi5aCR&sz=w1000" alt="Fotografía para Bailarines" class="service-img">
+                <div class="service-overlay">
+                    <h3>Bailarines</h3>
+                    <p>Capturamos la gracia, movimiento y expresión del arte dancístico.</p>
+                    <a href="https://instagram.com/cammyph_ok" target="_blank" class="btn">
+                        <i class="fab fa-instagram"></i> Ver en Instagram
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Servicio 2: Fiestas de 15 -->
+            <div class="service-card">
+                <img src="https://drive.google.com/thumbnail?id=1PCvljeshfguHUTNqumHU4Aq4e5IzC3h-&sz=w1000" alt="Fotografía para Fiestas de 15" class="service-img">
+                <div class="service-overlay">
+                    <h3>Fiestas de 15</h3>
+                    <p>Documentamos la magia y elegancia de tu celebración especial.</p>
+                    <a href="https://instagram.com/cammyph_ok" target="_blank" class="btn">
+                        <i class="fab fa-instagram"></i> Ver en Instagram
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Servicio 3: Moda -->
+            <div class="service-card">
+                <img src="https://drive.google.com/thumbnail?id=1eHYTd53gQcKKwHwfehdiQuAcJKGIzmAZ&sz=w1000" alt="Fotografía de Moda" class="service-img">
+                <div class="service-overlay">
+                    <h3>Moda</h3>
+                    <p>Imágenes impactantes que destacan estilo y creatividad.</p>
+                    <a href="https://instagram.com/cammyph_ok" target="_blank" class="btn">
+                        <i class="fab fa-instagram"></i> Ver en Instagram
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Servicio 4: Eventos -->
+            <div class="service-card">
+                <img src="https://drive.google.com/thumbnail?id=1dLzlBBiPz2C85pejikLSLX6RN0PlXEzn&sz=w1000" alt="Fotografía de Eventos" class="service-img">
+                <div class="service-overlay">
+                    <h3>Eventos</h3>
+                    <p>Cobertura completa de tus eventos sociales y corporativos.</p>
+                    <a href="https://instagram.com/cammyph_ok" target="_blank" class="btn">
+                        <i class="fab fa-instagram"></i> Ver en Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filosofía Section -->
+    <section class="philosophy" id="filosofia">
+        <div class="philosophy-content">
+            <div class="philosophy-text">
+                <h2>Nuestra Filosofía</h2>
+                <p>En Cammy PH creo que cada persona tiene un potencial artístico único esperando ser revelado. Mi misión es capturar esa esencia a través de la lente, creando imágenes que no solo documentan momentos, sino que cuentan historias profundas y auténticas.</p>
+                <p>Me especializo en comprender la personalidad y visión de cada cliente, adaptando mi enfoque para resaltar su individualidad y crear fotografías que trascienden el tiempo.</p>
+                <a href="#contacto" class="btn">Trabajemos Juntos</a>
+            </div>
+            <div class="philosophy-image">
+                <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Fotógrafa trabajando">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section class="contact" id="contacto">
+        <div class="section-title">
+            <h2>Contacto</h2>
+            <p>Pongámonos en contacto para discutir tu próximo proyecto fotográfico</p>
+        </div>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Información de Contacto</h3>
+                <p>Estoy aquí para ayudarte a capturar tus momentos más especiales. Contactame para agendar una sesión o consultar mis servicios.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>cammysfilm@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>2644824384</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Pocito Villa Aberastain, San Juan, Argentina</span>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://instagram.com/cammyph_ok" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form action="https://formspree.io/f/meorrrpk" method="POST" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="asunto" class="form-control" placeholder="Asunto" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="mensaje" class="form-control" placeholder="Mensaje" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Cammy PH</h3>
+                <p>Fotografía profesional especializada en revelar el máximo potencial artístico de cada persona.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#filosofia">Filosofía</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <ul class="footer-links">
+                    <li><a href="#servicios">Fotografía para Bailarines</a></li>
+                    <li><a href="#servicios">Fiestas de 15</a></li>
+                    <li><a href="#servicios">Fotografía de Moda</a></li>
+                    <li><a href="#servicios">Fotografía de Eventos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Cammy PH. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Efecto de header al hacer scroll
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Manejo del formulario de contacto
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Mostrar estado de envío
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.disabled = true;
+            
+            // Enviar el formulario
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('¡Gracias por tu mensaje! Te contactaré pronto.');
+                    this.reset();
+                } else {
+                    alert('Error al enviar el mensaje. Por favor, intenta nuevamente.');
+                }
+            })
+            .catch(error => {
+                alert('Error al enviar el mensaje. Por favor, intenta nuevamente.');
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+        
+        // Menú móvil (funcionalidad básica)
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>
